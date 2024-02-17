@@ -28,7 +28,7 @@ jobs:
         run: docker push ogabek07/ci-cd-practice:latest
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: [ci-cd]
     steps:
       - name: Pull image from docker hub
         run: docker pull ogabek07/ci-cd-practice:latest
