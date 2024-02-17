@@ -25,7 +25,7 @@ jobs:
       - name: Build docker image
         run: docker build -t ci-cd-practice .
       - name: Publish image to docker hub
-        run: docker push ci-cd-practice:latest
+        run: docker push ogabek07/ci-cd-practice:latest
   deploy:
     needs: build
     runs-on: [ci-cd-practice]
