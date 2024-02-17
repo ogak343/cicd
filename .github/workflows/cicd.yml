@@ -33,6 +33,6 @@ jobs:
       - name: Pull image from docker hub
         run: docker pull ogabek07/ci-cd-practice:latest
       - name: Delete old container
-        run: docker rm -f ci-cd-container || true
+        run: docker rm -f ci-cd-container
       - name: Run docker container
         run: docker run -d -p 8080:8080 --name ci-cd-container ogabek07/ci-cd-practice
