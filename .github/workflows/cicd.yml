@@ -9,7 +9,7 @@ on:
       - master
 jobs:
   build:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -28,11 +28,11 @@ jobs:
         run: docker push ogabek07/ci-cd-practice:latest
   deploy:
     needs: build
-    runs-on: [ci-cd-practice]
+    runs-on: ubuntu-latest
     steps:
       - name: Pull image from docker hub
         run: docker pull ogabek07/ci-cd-practice:latest
       - name: Delete old container
-        run: docker rm -f ci-cd-container
+        run: docker rm -f ci-cd-container || true
       - name: Run docker container
-        run: docker run -d -p 8080 --name ci-cd-container ogabek07/ci-cd-practice
+        run: docker run -d -p 8080:8080 --name ci-cd-container ogabek07/ci-cd-practice
