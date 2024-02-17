@@ -11,9 +11,4 @@ public class CiCdPracticeApplication {
         SpringApplication.run(CiCdPracticeApplication.class, args);
     }
 
-    @GetMapping
-    public String cheer() {
-        return "Hello";
-    }
-
 }
