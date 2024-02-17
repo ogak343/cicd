@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: gradle clean build
       - name: Login to DockerHub
-        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        run: docker login --username ${{secrets.DOCKER_USERNAME}} --password ${{secrets.DOCKER_PASSWORD}}
       - name: Build docker image
         run: docker build -t ogabek07/ci-cd-practice .
       - name: Publish image to docker hub
@@ -31,7 +31,7 @@ jobs:
     runs-on: [ci-cd]
     steps:
       - name: Login to DockerHub
-        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        run: docker login --username ${{secrets.DOCKER_USERNAME}} --password ${{secrets.DOCKER_PASSWORD}}
       - name: Pull image from docker hub
         run: docker pull ogabek07/ci-cd-practice:latest
       - name: Delete old container
