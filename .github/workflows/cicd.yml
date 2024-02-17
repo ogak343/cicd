@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: gradle clean build
       - name: Login to DockerHub
-        run: docker login -u ${{DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}}
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build docker image
         run: docker build -t ci-cd-practice .
       - name: Publish image to docker hub
