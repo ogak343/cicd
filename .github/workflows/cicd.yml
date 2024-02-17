@@ -30,6 +30,8 @@ jobs:
     needs: build
     runs-on: [ci-cd]
     steps:
+      - name: Login to DockerHub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Pull image from docker hub
         run: docker pull ogabek07/ci-cd-practice:latest
       - name: Delete old container
