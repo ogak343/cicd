@@ -27,7 +27,7 @@ jobs:
       - name: Publish image to docker hub
         run: docker push ogabek07/ci-cd-practice:latest
       - name: Trigger ./run.sh on EC2
-        uses: appleboy/ssh-action@v2.0.0
+        uses: appleboy/ssh-action@master
         with:
           host: 34.201.217.173
           username: ec2-user
