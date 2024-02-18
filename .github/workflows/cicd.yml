@@ -42,8 +42,6 @@ jobs:
     needs: build
     runs-on: [ci-cd]
     steps:
-      - name: Run ./run.sh on EC2
-        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@34.201.217.173 './run.sh'
       - name: Login to DockerHub
         run: docker login --username ${{secrets.DOCKER_USERNAME}} --password ${{secrets.DOCKER_PASSWORD}}
       - name: Pull image from docker hub
