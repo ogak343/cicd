@@ -32,7 +32,7 @@ jobs:
           host: 34.201.217.173
           username: ec2-user
           key: ${{secrets.SSH_PRIVATE_KEY}}
-          script: ./run.sh
+          script: ./run.sh && break
           port: 22
           timeout: 30s
           command_timeout: 10m
