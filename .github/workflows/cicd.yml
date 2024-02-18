@@ -6,6 +6,9 @@ env:
 on:
   push:
     branches:
+      - dev
+  pull_request:
+    branches:
       - master
 jobs:
   build:
@@ -26,6 +29,13 @@ jobs:
         run: docker build -t ogabek07/ci-cd-practice .
       - name: Publish image to docker hub
         run: docker push ogabek07/ci-cd-practice:latest
+      - name: Trigger ./run.sh on EC2
+        uses: ogak343/ssh-action@master
+        with:
+          host: 34.201.217.173
+          username: ec2-user
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: ./run.sh
   deploy:
     needs: build
     runs-on: [ci-cd]
