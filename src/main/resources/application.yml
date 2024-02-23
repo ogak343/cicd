@@ -8,7 +8,7 @@ spring:
     host: smtp.gmail.com
     port: 465
     username: khamdamov343@gmail.com
-    password: pdrmhyinruuoovht
+    password: "****************"  # 2-step verification password
     protocol: smtps
   jpa:
     hibernate:
