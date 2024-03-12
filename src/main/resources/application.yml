@@ -3,12 +3,12 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://127.0.0.1:5432/ci_cd
     username: postgres
-    password: slark
+    password: slark343
   mail:
     host: smtp.gmail.com
     port: 465
     username: khamdamov343@gmail.com
-    password: "****************"  # 2-step verification password
+    password: pdrmhyinruuoovht  # 2-step verification password
     protocol: smtps
   jpa:
     hibernate:
@@ -19,6 +19,8 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    default: local
 
 jwt:
   access: 5 #in minutes

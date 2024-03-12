@@ -12,7 +12,7 @@ public enum ErrorCode {
     ACCOUNT_NOT_ENABLED(401),
     ACCOUNT_EXISTS(400);
 
-    private int code;
+    private final int code;
 
     ErrorCode(int code) {
         this.code = code;
