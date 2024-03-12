@@ -29,7 +29,7 @@ jobs:
       - name: Run script on EC2 instance
         uses: appleboy/ssh-action@master
         with:
-          host: 54.90.179.115
+          host: 3.91.1.72
           username: ec2-user
           key: ${{secrets.SSH_PRIVATE_KEY}}
           script: |
