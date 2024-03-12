@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @OpenAPIDefinition(servers = {@Server(
         description = "local",
-        url = "http://127.0.0.1:8080"
+        url = "http://127.0.0.1"
 )})
 @SecurityScheme(name = "bearerAuth",
         scheme = "bearer",
