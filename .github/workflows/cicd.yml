@@ -32,7 +32,12 @@ jobs:
           host: 52.4.71.213
           username: ec2-user
           key: ${{secrets.SSH_PRIVATE_KEY}}
-          script: ./run.sh
+          script: |
+            if pgrep -f "github-runner" >/dev/null; then
+              echo "runner is active"
+            else 
+              ./run.sh
+            fi
   deploy:
     needs: build
     runs-on: [ ci-cd ]
