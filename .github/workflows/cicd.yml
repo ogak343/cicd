@@ -36,7 +36,7 @@ jobs:
             if pgrep -f "github-runner" >/dev/null; then
               echo "runner is active"
             else
-              ./run.sh
+              sudo ./run.sh
             fi
   deploy:
     needs: build
