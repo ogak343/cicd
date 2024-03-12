@@ -26,18 +26,6 @@ jobs:
         run: docker build -t ${{secrets.DOCKER_USERNAME}}/ci-cd-practice .
       - name: Publish image to docker hub
         run: docker push ${{secrets.DOCKER_USERNAME}}/ci-cd-practice:latest
-      - name: Run script on EC2 instance
-        uses: appleboy/ssh-action@master
-        with:
-          host: 52.4.71.213
-          username: ec2-user
-          key: ${{secrets.SSH_PRIVATE_KEY}}
-          script: |
-            if pgrep -f "github-runner" >/dev/null; then
-              echo "runner is active"
-            else 
-              ./run.sh
-            fi
   deploy:
     needs: build
     runs-on: [ ci-cd ]
