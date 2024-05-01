@@ -8,9 +8,9 @@ spring:
     password: slark343
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
-    liquibase-schema: migration
+    liquibase-schema: public
     default-schema: public
-    enabled: true
+    enabled: false
   mail:
     host: smtp.gmail.com
     port: 465
