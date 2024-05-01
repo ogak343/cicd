@@ -18,6 +18,7 @@ public class AuthController {
 
     private final AuthService service;
 
+
     @PostMapping("/create")
     public ResponseEntity<RespDto<Long>> create(@Valid @RequestBody AuthReqDto reqDto) {
 
