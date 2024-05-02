@@ -32,6 +32,7 @@ definitions:
               PROJECT_KEY: $PROJECT_KEY
               CLUSTER_NAME: "cicd"
               IMAGE: "gcr.io/sunny-emissary-421003/ogabek07/ci_cd:$BITBUCKET_COMMIT"
+
 pipelines:
   pull-requests:
     '**':
