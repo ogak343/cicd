@@ -27,12 +27,22 @@ definitions:
     - step: &deployment
         name: Deploy to K8s
         script:
-          - pipe: atlassian/google-kubernetes-engine-deploy:1.1.0
-            variables:
-              PROJECT_KEY: $PROJECT_KEY
-              CLUSTER_NAME: "cicd"
-              IMAGE: "gcr.io/sunny-emissary-421003/ogabek07/ci_cd:$BITBUCKET_COMMIT"
+          - echo "$SERVICE_ACCOUNT_KEY" | base64 --decode > ./gcp-key.json
+          - gcloud auth activate-service-account --key-file=./gcp-key.json
+          - gcloud config set project sunny-emissary-421003
 
+          - gcloud container clusters get-credentials cicd --zone us-central1
+
+          - sed -i "s/{IMAGE_TAG}/$BITBUCKET_COMMIT/g" kubernetes/deployment.yaml
+
+          - kubectl apply -f kubernetes/deployment.yaml
+          - kubectl apply -f kubernetes/service.yaml
+#          - echo $GCLOUD_SERVICE_KEY_FILE | base64 --decode --ignore-garbage > ./gcloud-service-key.json
+#          - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+#          - gcloud container clusters get-credentials cicd --zone us-central1 --project sunny-emissary-421003
+#          - docker build -t gcr.io/sunny-emissary-421003/ogabek07/ci_cd:latest .
+#          - docker push gcr.io/sunny-emissary-421003/ogabek07/ci_cd:latest
+#          - kubectl apply -f path/to/kubernetes-manifests
 pipelines:
   pull-requests:
     '**':
