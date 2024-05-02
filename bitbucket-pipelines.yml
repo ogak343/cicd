@@ -27,14 +27,15 @@ definitions:
     - step: &deployment
         name: Deploy to K8s
         script:
+          - curl https://sdk.cloud.google.com | bash
+          - exec -l $SHELL
+          - gcloud version
           - echo "$SERVICE_ACCOUNT_KEY" | base64 --decode > ./gcp-key.json
           - gcloud auth activate-service-account --key-file=./gcp-key.json
           - gcloud config set project sunny-emissary-421003
 
           - gcloud container clusters get-credentials cicd --zone us-central1
-
           - sed -i "s/{IMAGE_TAG}/$BITBUCKET_COMMIT/g" kubernetes/deployment.yaml
-
           - kubectl apply -f kubernetes/deployment.yaml
           - kubectl apply -f kubernetes/service.yaml
 #          - echo $GCLOUD_SERVICE_KEY_FILE | base64 --decode --ignore-garbage > ./gcloud-service-key.json
