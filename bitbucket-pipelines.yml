@@ -32,12 +32,6 @@ definitions:
               PROJECT_KEY: $PROJECT_KEY
               CLUSTER_NAME: "cicd"
               IMAGE: "gcr.io/sunny-emissary-421003/ogabek07/ci_cd:$BITBUCKET_COMMIT"
-#          - echo $GCLOUD_SERVICE_KEY_FILE | base64 --decode --ignore-garbage > ./gcloud-service-key.json
-#          - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-#          - gcloud container clusters get-credentials cicd --zone us-central1 --project sunny-emissary-421003
-#          - docker build -t gcr.io/sunny-emissary-421003/ogabek07/ci_cd:latest .
-#          - docker push gcr.io/sunny-emissary-421003/ogabek07/ci_cd:latest
-#          - kubectl apply -f path/to/kubernetes-manifests
 pipelines:
   pull-requests:
     '**':
