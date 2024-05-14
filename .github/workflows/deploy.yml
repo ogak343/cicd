@@ -22,6 +22,7 @@ jobs:
       - name: Build Docker image
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
+          gradle clean build
           docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/app:${{ github.sha }} .
           docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/app:${{ github.sha }}
 
