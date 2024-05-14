@@ -29,4 +29,4 @@ jobs:
 
       - name: Apply Kubernetes configuration
         run: |
-          kubectl apply -f my-demo-cluster.yaml
+          kubectl apply -f deployment.yaml
