@@ -12,6 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up JDK and Gradle
+        uses: actions/setup-java@v2
+        with:
+            distribution: 'adopt'
+            java-version: '17'
+            gradle-version: '7.x.x'
+
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
