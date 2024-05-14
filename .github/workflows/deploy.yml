@@ -17,7 +17,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER_NAME }}
-  GKE_ZONE: ${{ GKE_CLUSTER_ZONE }}
+  GKE_ZONE: ${{ secrets.GKE_CLUSTER_ZONE }}
   DEPLOYMENT_NAME: my-demo-cluster
   IMAGE: static-site
 
