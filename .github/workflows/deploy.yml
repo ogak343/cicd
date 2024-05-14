@@ -17,26 +17,18 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
+          install_component: 'gke-gcloud-auth-plugin'
           export_default_credentials: true
-
-      - name: Configure Docker
-        uses: docker/login-action@v2
-        with:
-          username: _json_key
-          password: ${{ secrets.GCP_SA_KEY }}
-          registry: gcr.io
-
       - name: Build Docker image
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/app:${{ github.sha }} .
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/app:${{ github.sha }}
-        continue-on-error: true
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/app:${{ github.sha }} .
+          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/app:${{ github.sha }}
 
-      - name: Configure kubectl
+      - name: Deploy to GKE
+        env:
+          GOOGLE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
         run: |
-          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
-        continue-on-error: true
-
-      - name: Apply Kubernetes configuration
-        run: |
-          kubectl apply -f deployment.yaml
+          gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1
+          sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" resource.yaml
+          kubectl apply -f resource.yaml
