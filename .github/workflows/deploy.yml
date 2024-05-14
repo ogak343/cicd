@@ -29,6 +29,7 @@ jobs:
 
       - name: Build Docker image
         run: |
+          gcloud components install gke-gcloud-auth-plugin
           gcloud auth configure-docker ogabek07
           gradle clean build
           docker login --username ${{secrets.DOCKER_USERNAME}} --password ${{secrets.DOCKER_PASSWORD}}
