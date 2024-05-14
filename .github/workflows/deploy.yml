@@ -12,8 +12,7 @@ jobs:
 
       - name: Decode service account key and activate
         run: |
-          echo $${{ secrets.GCP_SA_KEY }} | base64 -d | gcloud auth activate-service-account --stdin \
-            khamdamov343@gmail.com
+          echo "${{ secrets.GCP_SA_KEY }}" | base64 -d | gcloud auth activate-service-account khamdamov343@gmail.com
 
       - name: Build Docker image
         run: gradle clean build | docker build -t gcr.io/${{secrets.GKE_PROJECT}}/ci-cd-practice:latest
