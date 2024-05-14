@@ -10,8 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Login to Google Cloud
-        run: echo ${{ secrets.GKE_SA_KEY }} | base64 -d | gcloud auth activate-service-account --key-file=-
+      - name: Decode service account key and activate
+        run: |
+          echo $${{ secrets.SERVICE_ACCOUNT_KEY }} | base64 -d > service_account.json
+          gcloud auth activate-service-account \
+            --key-file=service_account.json \
+            khamdamov343@gmail.com
 
       - name: Build Docker image
         run: gradle clean build | docker build -t gcr.io/${{secrets.GKE_PROJECT}}/ci-cd-practice:latest
