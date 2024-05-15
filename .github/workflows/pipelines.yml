@@ -8,8 +8,7 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
   GKE_ZONE: us-central1
-  DEPLOYMENT_NAME: github-actions-gke
-  IMAGE: github-actions-gke-image
+  DEPLOYMENT_NAME: ci-cd-deployment
   TAG: 1.0.0
 jobs:
   deploy:
