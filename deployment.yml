@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-demo-cluster
-          image: ogabek07/app:latest
+          image: ogabek07/app:${{github.sha}}
           ports:
             - containerPort: 8080
   strategy:
