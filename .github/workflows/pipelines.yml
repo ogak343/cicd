@@ -4,12 +4,13 @@ on:
   push:
     branches:
       - master
+      -
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
   GKE_ZONE: us-central1
   DEPLOYMENT_NAME: ci-cd-deployment
-  TAG: 1.0.0
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -36,7 +37,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
 
       - name: Configure GCloud
-        run: |- 
+        run: |-
           gcloud --quiet auth configure-docker
           gcloud components install kubectl
           gcloud components install gke-gcloud-auth-plugin
@@ -45,15 +46,17 @@ jobs:
       - name: Docker image
         run: |
           docker login --username ${{secrets.DOCKER_USERNAME}} --password ${{secrets.DOCKER_PASSWORD}}
-          docker build -t ${{secrets.DOCKER_USERNAME}}/app:latest .
-          docker push ${{secrets.DOCKER_USERNAME}}/app:latest
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t ${{secrets.DOCKER_USERNAME}}/app:$IMAGE_TAG .
+          docker push ${{secrets.DOCKER_USERNAME}}/app:$IMAGE_TAG
 
       - name: Set up Kustomize
         run: |-
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
+
       - name: Deploy to GKE
         run: |-
-          ./kustomize edit set image ${{ secrets.DOCKER_USERNAME }}/app:latest=${{ secrets.DOCKER_USERNAME }}/app:latest
+          ./kustomize edit set image ${{ secrets.DOCKER_USERNAME }}/app:latest=${{ secrets.DOCKER_USERNAME }}/app:$IMAGE_TAG
           ./kustomize build . | kubectl apply -f -
-          kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} my-demo-cluster=${{ secrets.DOCKER_USERNAME }}/app:latest
+          kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} my-demo-cluster=${{ secrets.DOCKER_USERNAME }}/app:$IMAGE_TAG
