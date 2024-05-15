@@ -6,14 +6,14 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: ci-cd
+      app: my-demo-cluster
   template:
     metadata:
       labels:
-        app: ci-cd
+        app: my-demo-cluster
     spec:
       containers:
-        - name: ci-cd
+        - name: my-demo-cluster
           image: ogabek07/app:latest
           ports:
             - containerPort: 8080
