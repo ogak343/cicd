@@ -33,8 +33,7 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-          install_components: 'gke-gcloud-auth-plugin'
-          export_default_credentials: true
+          components: 'kubectl'
 
       - name: Configure Docker
         run: |- 
