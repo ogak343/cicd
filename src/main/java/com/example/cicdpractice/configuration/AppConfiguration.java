@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
             url = "http://127.0.0.1"),
         @Server(
             description = "master",
-            url = "http://52.4.71.213:8080"
+            url = "http://34.28.131.212:8080"
         )
 })
 @SecurityScheme(name = "bearerAuth",
