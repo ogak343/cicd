@@ -56,5 +56,5 @@ jobs:
         run: |-
           ./kustomize edit set image ${{ secrets.DOCKER_USERNAME }}/app:latest=${{ secrets.DOCKER_USERNAME }}/app:latest
           ./kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl rollout restart deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
