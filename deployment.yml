@@ -6,11 +6,11 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: ci-cd
+      app: my-demo-cluster
   template:
     metadata:
       labels:
-        app: ci-cd
+        app: my-demo-cluster
     spec:
       containers:
         - name: my-demo-cluster
