@@ -18,7 +18,6 @@ public class AuthController {
 
     private final AuthService service;
 
-
     @PostMapping("/create")
     public ResponseEntity<RespDto<Long>> create(@Valid @RequestBody AuthReqDto reqDto) {
 
@@ -51,5 +50,10 @@ public class AuthController {
         log.info("[valid] username : {}", username);
 
         return ResponseEntity.ok(new RespDto<>(service.valid(username)));
+    }
+
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello() {
+        return ResponseEntity.ok("Hello");
     }
 }
