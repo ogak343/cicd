@@ -50,7 +50,6 @@ jobs:
           docker push ${{secrets.DOCKER_USERNAME}}/app:$IMAGE_TAG
 
       - name: Deploy to GKE
-        uses: alpine/helm:3.10.1
         run: |
           envsubst '${{github.sha}}' < Chart.yaml > dumpfile && mv dumpfile Chart.yaml
           envsubst '${{github.sha}}' < values.yaml > dumpfile && mv dumpfile values.yaml
