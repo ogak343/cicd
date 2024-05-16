@@ -51,6 +51,7 @@ jobs:
 
       - name: Deploy to GKE
         run: |
+          cd helm
           envsubst '${{github.sha}}' < Chart.yaml > dumpfile && mv dumpfile Chart.yaml
           envsubst '${{github.sha}}' < values.yaml > dumpfile && mv dumpfile values.yaml
-          helm install ci-cd-pipeline ./helm --version 0.0.${{ github.sha}} --namespace development --values values.yaml --wait --timeout 300s
+          helm install ci-cd-pipeline . --version 0.0.${{ github.sha}} --namespace development --values values.yaml --wait --timeout 300s
