@@ -1,0 +1,29 @@
+ci-cd:
+
+  name: ci-cd-practice
+
+  image:
+    repository: ogabek07
+    tag: "${{github.sha}}"
+
+  service:
+    port: 8080
+
+  context: "ci-cd"
+
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: development
+#    - name: SPRING_DATASOURCE_URL
+#      value: "jdbc:postgresql://10.222.1.39:5432/payments"
+#    - name: SPRING_DATASOURCE_USERNAME
+#      valueFrom:
+#        secretKeyRef:
+#          name: ci-cd-service
+#          key: spring.datasource.username
+#    - name: SPRING_DATASOURCE_PASSWORD
+#      valueFrom:
+#        secretKeyRef:
+#          name: ci-cd-service
+#          key: spring.datasource.password
+

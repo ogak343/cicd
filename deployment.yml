@@ -14,11 +14,6 @@ spec:
     spec:
       containers:
         - name: my-demo-cluster
-          image: "ogabek07/app:${{github.sha}}"
+          image: ogabek07/app:${{github.sha}}
           ports:
             - containerPort: 8080
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
