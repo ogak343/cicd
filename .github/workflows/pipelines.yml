@@ -51,8 +51,7 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          cd helm
-          apk add gettext curl bash
+          cd /helm
           env subst '${{github.sha}}' < Chart.yaml > dumpfile && mv dumpfile Chart.yaml
           env subst '${{github.sha}}' < values.yaml > dumpfile && mv dumpfile values.yaml
           helm install ci-cd-pipeline . --version 0.0.${{ github.sha}} --namespace development --values values.yaml --wait --timeout 300s
