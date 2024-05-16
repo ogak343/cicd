@@ -51,7 +51,7 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          env subst '${{github.sha}}' < Chart.yaml > dumpfile && mv dumpfile Chart.yaml
-          env subst '${{github.sha}}' < values.yaml > dumpfile && mv dumpfile values.yaml
+          env subst '${{github.sha}}' < helm/Chart.yaml > dumpfile && mv dumpfile helm/Chart.yaml
+          env subst '${{github.sha}}' < helm/values.yaml > dumpfile && mv dumpfile helm/values.yaml
           helm dependency build helm
           helm upgrade --wait --timeout 300s --atomic --install ci-cd-pipeline helm --version 0.0.${{ github.sha}} --namespace development --values values.yaml
