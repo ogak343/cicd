@@ -52,7 +52,7 @@ jobs:
       - name: Set up Kubernetes configuration
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBE_CONFIG_CI_CD }}" | base64 -d > ~/.kube/config
+          echo "${{ secrets.KUBE_CONFIG_CI_CD }}" | base64 > ~/.kube/config
           sudo apt-get update
           sudo apt-get install -y gettext curl bash
           cd helm
